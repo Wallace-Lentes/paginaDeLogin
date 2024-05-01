@@ -49,7 +49,7 @@ class Cadastro extends Component {
                 <p>Data de Nascimento:<input type="text" placeholder="21/12/2001" onChange={(e)=>this.setState({ dataNascimento: e.target.value})}/></p>
                 <p>Senha:<input type="password" placeholder="******" onChange={(e)=>this.setState({ senha: e.target.value})}/></p>
                 <button onClick={this.cadastrar}>Cadastrar</button>
-                <Link to="/">Login</Link>
+                <Link className="link" to="/">Login</Link>
             </div>
         );
     }

@@ -1,7 +1,33 @@
+body {
+
+    background-color: #282c34;
+}
+
+input {
+    width: 120%;
+    border-radius: 12px;
+    background-color: #95d195;
+    padding: 5px;
+}
+
+button {
+    border-radius: 12px;
+    background-color: #95d195;
+    padding: 5px;
+}
+
+button:hover {
+    transform: scale(1.1);
+    transition: 0.3s;
+    cursor: pointer;
+}
+
+.link{
+    color: #f4f4f4 ;
+    
+}
 .mainLogin{
     display: flex;
     flex-direction: column;
-    /* justify-content: center; */
     align-items: center;
-    /* gap: 25px; */
 }

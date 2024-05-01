@@ -1,13 +1,49 @@
-.mainCadastro{
-    display: flex;
-    flex-direction: column;
-    /* justify-content: center; */
-    align-items: center;
-    
+body {
+    color: #f4f4f4 ;
+    background-color: #282c34;
 }
 
-p{
+input {
+    width: 120%;
+    border-radius: 12px;
+    background-color: #95d195;
+    padding: 5px;
+}
+
+button {
+    border-radius: 12px;
+    background-color: #95d195;
+    padding: 5px;
+}
+
+button:hover {
+    transform: scale(1.1);
+    transition: 0.3s;
+    cursor: pointer;
+}
+
+.link{
+    color: #f4f4f4 ;
+    text-decoration: none;
+       
+}
+
+.link:hover{
+text-decoration: underline;
+    transform: scale(1.1);
+    transition: 0.3s;
+    cursor: pointer;
+}
+
+.mainCadastro {
     display: flex;
     flex-direction: column;
-    gap:5px;
+    align-items: center;
+
+}
+
+p {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
 }

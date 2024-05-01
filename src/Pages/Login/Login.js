@@ -34,7 +34,7 @@ class Login extends Component {
         <p>Usuario<input type="text" placeholder="E-mail" onChange={(e)=> this.setState({email:e.target.value})} /></p>
         <p>Senha<input type="password" placeholder="Senha" onChange={(e)=> this.setState({senha:e.target.value})}/></p>
         <button onClick={this.acessar}>Fazer login</button>
-        <Link to="/Cadastro">Criar conta</Link>
+        <Link className="link" to="/Cadastro">Criar conta</Link>
       </div>
     );
   }
