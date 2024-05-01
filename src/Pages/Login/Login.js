@@ -8,36 +8,44 @@ class Login extends Component {
         super(props);
         this.state = {
             email: "",
-            senha: ""
-          
+            senha: "",
+            error: null 
         }
 
         this.acessar = this.acessar.bind(this);
     }
 
-    async acessar(){
+    async acessar() {
+        const { email, senha } = this.state;
 
-        await firebase.auth().signInWithEmailAndPassword(this.state.email, this.state.senha)
-        .then(()=>{
-            window.location.href = './Dashboard'
-        })
-        .catch((error) => {
-            
-        });
+      
+        if (!email || !senha) {
+            this.setState({ error: 'Por favor, preencha todos os campos.' });
+            return;
+        }
+
+        try {
+            await firebase.auth().signInWithEmailAndPassword(email, senha);
+            window.location.href = './Dashboard';
+        } catch (error) {
+            this.setState({ error: error.message });
+        }
     }
 
+    render() {
+        const { error } = this.state;
 
-  render() {
-    return (
-      <div className="mainLogin">
-        <h1>Login</h1>
-        <p>Usuario<input type="text" placeholder="E-mail" onChange={(e)=> this.setState({email:e.target.value})} /></p>
-        <p>Senha<input type="password" placeholder="Senha" onChange={(e)=> this.setState({senha:e.target.value})}/></p>
-        <button onClick={this.acessar}>Fazer login</button>
-        <Link className="link" to="/Cadastro">Criar conta</Link>
-      </div>
-    );
-  }
+        return (
+            <div className="mainLogin">
+                <h1>Login</h1>
+                {error && <p className="error">{error}</p>}
+                <p>Usuario<input type="text" placeholder="E-mail" onChange={(e) => this.setState({ email: e.target.value })} /></p>
+                <p>Senha<input type="password" placeholder="Senha" onChange={(e) => this.setState({ senha: e.target.value })} /></p>
+                <button onClick={this.acessar}>Fazer login</button>
+                <Link className="link" to="/Cadastro">Criar conta</Link>
+            </div>
+        );
+    }
 }
 
 export default Login;

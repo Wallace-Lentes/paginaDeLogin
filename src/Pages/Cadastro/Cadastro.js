@@ -11,38 +11,46 @@ class Cadastro extends Component {
             sobrenome: "",
             email: "",
             dataNascimento: "",
-            senha: ""
+            senha: "",
+            error: null
                   
         }
 
         this.cadastrar = this.cadastrar.bind(this);
     }
 
-    async cadastrar(){
+    async cadastrar() {
+        const { nome, sobrenome, email, dataNascimento, senha } = this.state;
+    
+        if (!nome || !sobrenome || !email || !dataNascimento || !senha) {
+            this.setState({ error: 'Por favor, preencha todos os campos.' });
+            console.log(this.state.error); 
 
-        await firebase.auth().createUserWithEmailAndPassword(this.state.email, this.state.senha)
-        .then(async(retorno) => {
-
+            return;
+        }
+    
+        try {
+            const retorno = await firebase.auth().createUserWithEmailAndPassword(email, senha);
+    
             await firebase.firestore().collection("usuarios").doc(retorno.user.uid).set({
-                nome: this.state.nome,
-                sobrenome: this.state.sobrenome,
-                dataNascimento: this.state.dataNascimento,
+                nome,
+                sobrenome,
+                dataNascimento,
             });
-
-
-
-        });
-
-        // await firebase.firestore().collection('usuarios').add({
-        //     nome: this.state.nome,
-        //     sobrenome: this.state.sobrenome,            
-        // }); 
+    
+            alert('Cadastro realizado com sucesso!');
+        } catch (error) {
+            alert(`Erro ao cadastrar: ${error.message}`);
+        }
     }
+    
 
     render(){
+        const { error } = this.state;
         return (
             <div className="mainCadastro">
                 <h1>Cadastro</h1>
+                {error && <p className="error">{error}</p>}
                 <p>Nome:<input label='nome' type="text" placeholder="Ex: Maria" onChange={(e)=>this.setState({ nome: e.target.value})}/></p>
                 <p>Sobrenome:<input type="text" placeholder="Ex: Santos" onChange={(e)=>this.setState({ sobrenome: e.target.value})}/></p>
                 <p>E-mail:<input type="text" placeholder="Ex: Maria.Santos@example.com" onChange={(e)=>this.setState({ email: e.target.value})}/></p>
